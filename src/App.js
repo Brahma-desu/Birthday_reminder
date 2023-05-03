@@ -1,24 +1,39 @@
 import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import data from "./data/data";
+import Show from "./Show";
+import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
 
 function App() {
+  const [count, setCount] = useState(data.length);
+
+  // console.log(count);
+  const todayDate = new Date();
+  todayDate.getDate();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Box
+      sx={{
+        width: 300,
+        height: 300,
+        textAlign: 'center'
+        // backgroundColor: 'primary.dark',
+        // '&:hover': {
+        //   backgroundColor: 'primary.main',
+        //   opacity: [0.9, 0.8, 0.7],
+        // },
+      }}
+    >
+      <h2>{count} Birthdays Today</h2>
+      {
+        data.map((item) => {
+          if(todayDate.getDate() === item.date){
+            return <Show key={item.id} {...item} />;
+          }
+        })
+      }
+    </Box>
   );
 }
 
